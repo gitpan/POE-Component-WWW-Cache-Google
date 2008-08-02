@@ -1,6 +1,6 @@
 ---
 name: POE-Component-WWW-Cache-Google
-version: 0.0101
+version: 0.0201
 author:
   - 'Zoffix Znet <zoffix@cpan.org>'
 abstract: non-blocking wrapper around WWW::Cache::Google
@@ -17,7 +17,7 @@ build_requires:
 provides:
   POE::Component::WWW::Cache::Google:
     file: lib/POE/Component/WWW/Cache/Google.pm
-    version: 0.0101
+    version: 0.0201
 generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

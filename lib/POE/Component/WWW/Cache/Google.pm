@@ -3,7 +3,7 @@ package POE::Component::WWW::Cache::Google;
 use warnings;
 use strict;
 
-our $VERSION = '0.0101';
+our $VERSION = '0.0201';
 
 use POE;
 use base 'POE::Component::NonBlockingWrapper::Base';
@@ -29,6 +29,7 @@ sub _process_request {
         my $ua = LWP::UserAgent->new(
             agent   => 'Opera 9.5', # trick google into not giving us 403s
             timeout => 30,
+            max_size => $in_ref->{max_size},
         );
 
         my $response = $ua->get( $in_ref->{cache} );
@@ -168,6 +169,7 @@ C<0>.
     $poco->cache( {
             event       => 'event_for_output',
             uri         => 'http://zoffix.com',
+            max_size    => 1000,
             fetch       => 1, # or fetch => \'file_name', 
             overwrite => 1,
             _blah       => 'pooh!',
@@ -197,6 +199,7 @@ Takes no arguments. Shuts down the component.
     $poe_kernel->post( google_cache => cache => {
             event       => 'event_for_output',
             uri         => 'http://zoffix.com',
+            max_size    => 1000,
             fetch       => 1, # or fetch => \'file_name',
             overwrite   => 1,
             _blah       => 'pooh!',
@@ -246,6 +249,19 @@ to a scalarref which is a filename. Can take either true or false values.
 When set to a true value will overwrite the filename set via C<fetch>
 argument if the file already exists. B<Defaults to:> C<0> (no overwriting
 - error out instead)
+
+=head3 C<max_size>
+
+    { max_size => 1000, }
+
+B<Optional>. Regarded only when the C<fetch> argument is not a false value.
+The value you specify (which indicates the maximum length of the content to
+retrieve) will by passed to L<LWP::UserAgent>'s C<max_size>
+method. Use this argument if you just want to have error checking with
+regards to actual existance of that cache page. B<Note:> component
+*does* actually need some content to determine if the cached page exists,
+thus do not set max_size below 100. B<By default> is not set, thus no
+limit on the content length is imposed.
 
 =head3 C<session>
 
@@ -320,10 +336,11 @@ the file when C<fetch> argument is set to a scalarref.
 
     'overwrite' => 1,
     'fetch' => 1,
+    'max_size' => 100,
     'uri' => 'http://zoffix.com',
 
-The C<overwrite>, C<fetch> and C<uri> arguments passed to C<cache>
-event/method will be present in the output intact.
+The C<overwrite>, C<fetch>, C<max_size> and C<uri> arguments passed to
+C<cache> event/method will be present in the output intact.
 
 =head2 user defined
 
