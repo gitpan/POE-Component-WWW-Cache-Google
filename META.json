@@ -1,0 +1,50 @@
+{
+   "abstract" : "non-blocking wrapper around WWW::Cache::Google",
+   "author" : [
+      "Zoffix Znet <zoffix@cpan.org>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.132830",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "POE-Component-WWW-Cache-Google",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "LWP::UserAgent" : "2.036",
+            "POE" : "0.9999",
+            "POE::Component::NonBlockingWrapper::Base" : "0.002",
+            "WWW::Cache::Google" : "0.04",
+            "perl" : "5.006"
+         }
+      }
+   },
+   "provides" : {
+      "POE::Component::WWW::Cache::Google" : {
+         "file" : "lib/POE/Component/WWW/Cache/Google.pm",
+         "version" : "0.0202"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ]
+   },
+   "version" : "0.0202"
+}

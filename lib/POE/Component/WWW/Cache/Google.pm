@@ -3,7 +3,7 @@ package POE::Component::WWW::Cache::Google;
 use warnings;
 use strict;
 
-our $VERSION = '0.0201';
+our $VERSION = '0.0202';
 
 use POE;
 use base 'POE::Component::NonBlockingWrapper::Base';
@@ -27,7 +27,9 @@ sub _process_request {
 
     if ( $in_ref->{fetch} ) {
         my $ua = LWP::UserAgent->new(
-            agent   => 'Opera 9.5', # trick google into not giving us 403s
+            agent   => 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:21.0) '
+             . 'Gecko/20100101 Firefox/21.0',
+             # trick google into not giving us 403s
             timeout => 30,
             max_size => $in_ref->{max_size},
         );
@@ -35,6 +37,9 @@ sub _process_request {
         my $response = $ua->get( $in_ref->{cache} );
         if ( not $response->is_success ) {
             $in_ref->{error} = $response->status_line;
+            if ( $in_ref->{error} eq '404 Not Found' ) {
+                $in_ref->{error} = q|Doesn't look like cache exists|;
+            }
             return;
         }
 
@@ -68,6 +73,8 @@ sub _process_request {
 
 1;
 __END__
+
+=encoding utf8
 
 =head1 NAME
 
@@ -170,7 +177,7 @@ C<0>.
             event       => 'event_for_output',
             uri         => 'http://zoffix.com',
             max_size    => 1000,
-            fetch       => 1, # or fetch => \'file_name', 
+            fetch       => 1, # or fetch => \'file_name',
             overwrite => 1,
             _blah       => 'pooh!',
             session     => 'other',

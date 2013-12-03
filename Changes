@@ -1,9 +1,16 @@
 Revision history for POE-Component-WWW-Cache-Google
 
-0.0201  August 2, 2008
-        Added support for max_size argument to limit maximum fetched
-        content size
+0.0202  2013-12-02
+        - Minor fixes to comply with the specs and Kwalitee game
+        - Added autogeneration of README from POD
+        - Moved author tests to xt/
+        - Changed the newly added 404 error to report the
+          old style way with "Doesn't look like cache exists"
 
-0.0101  August 1, 2008
-        First version, released on an unsuspecting world.
+0.0201  2008-08-02
+        - Added support for max_size argument to limit maximum fetched
+          content size
+
+0.0101  2008-08-01
+        - First version, released on an unsuspecting world.
 

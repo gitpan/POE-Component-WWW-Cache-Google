@@ -1,24 +1,28 @@
 ---
-name: POE-Component-WWW-Cache-Google
-version: 0.0201
+abstract: 'non-blocking wrapper around WWW::Cache::Google'
 author:
   - 'Zoffix Znet <zoffix@cpan.org>'
-abstract: non-blocking wrapper around WWW::Cache::Google
+build_requires:
+  Test::More: 0
+configure_requires:
+  Module::Build: 0
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.132830'
 license: perl
-resources:
-  license: http://dev.perl.org/licenses/
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: POE-Component-WWW-Cache-Google
+provides:
+  POE::Component::WWW::Cache::Google:
+    file: lib/POE/Component/WWW/Cache/Google.pm
+    version: 0.0202
 requires:
   LWP::UserAgent: 2.036
   POE: 0.9999
   POE::Component::NonBlockingWrapper::Base: 0.002
   WWW::Cache::Google: 0.04
-build_requires:
-  Test::More: 0
-provides:
-  POE::Component::WWW::Cache::Google:
-    file: lib/POE/Component/WWW/Cache/Google.pm
-    version: 0.0201
-generated_by: Module::Build version 0.2808
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  perl: 5.006
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.0202
